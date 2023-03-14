@@ -59,7 +59,7 @@ class CompressionDistortion(TransformerMixin, BaseEstimator):
         CompressionDistortion
         """
         pca = PCA()
-        pca.set_params({"n_components": self.n_components})
+        pca.set_params(**{"n_components": self.n_components})
         X_train = X if self.normal_window else X[slice]
         pca.fit(X_train)
         self.pca = pca

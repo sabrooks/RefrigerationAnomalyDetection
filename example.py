@@ -10,9 +10,11 @@ omg = df.where(df.loc[:, "series"] == "Omgeving")\
     .set_index("timestamp")\
     .sort_index()
 
+omg.to_parquet("data/omg.parquet")
+
 X = omg.loc[:, "value"]
 widths = np.arange(100, 3100, 100)
 
-pipe = anomaly_pipeline.set_params(**{"wavelet__widths": widths}).fit(X)
+pipe = anomaly_pipeline[:-1].set_params(**{"wavelet__widths": widths}).fit(X)
 
 print(omg.shape)
